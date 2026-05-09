@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>言葉の扉</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main>
+    <section id="door-screen" class="screen active">
+      <div class="door-header">
+        <p class="tiny">WORD DOOR</p>
+        <h1>言葉の扉が現れました。</h1>
+        <p class="lead">古典の言葉から、その時代と意図へ入っていきます。</p>
+      </div>
+      
+      
+
+      <div class="top-actions">
+        <button id="tocButton" class="sub-action" type="button">目次を見る</button>
+        <button id="resetSeenButton" class="sub-action ghost" type="button">既読をリセット</button>
+      </div>
+      <div id="progressText" class="progress-text"></div>
+      <div id="doorChoices" class="door-choices"></div>
+      <button id="shuffleBtn" class="ghost"></button>
+    </section>
+
+    <section id="quote-screen" class="screen">
+      <button id="backBtn" class="ghost top">← 扉へ戻る</button>
+      <article class="card word-card">
+        <div class="content">
+          <p id="doorLabel" class="door-label"></p>
+          <p id="typeLabel" class="type-label"></p>
+          <h1 id="quoteTitle">Loading...</h1>
+          <p id="languageLabel" class="language-label"></p>
+          <blockquote id="quoteText"></blockquote>
+          <div id="knownWrap" class="translation-block">
+            <h2>よく知られる読み方</h2>
+            <p id="knownJp" class="known-jp"></p>
+          </div>
+          <div class="translation-block">
+            <h2>WORD DOOR訳</h2>
+            <p id="quoteJp" class="quote-jp"></p>
+          </div>
+          <div class="translation-block">
+            <h2>言葉の核</h2>
+            <p id="translationNote" class="translation-note"></p>
+          </div>
+          <section><h2>込められた意図</h2><p id="intent"></p></section>
+          <section id="workContextWrap"><h2>どの作品・文章に出てくる？</h2><p id="workContext"></p></section>
+          <section><h2>どんな人？</h2><p id="bio"></p></section>
+          <section><h2>その人の功績</h2><p id="episode"></p></section>
+          <section><h2>いつ、どんな時の言葉？</h2><p id="scene"></p></section>
+          <section><h2>時代背景</h2><p id="context"></p></section>
+          <section><h2>今の生活につながる話</h2><p id="connection"></p></section>
+          <section><h2>似た言葉</h2><div id="relatedQuotes" class="chips related-chips"></div></section>
+          <section id="traceBox" class="timeline-box"></section>
+          <div class="actions">
+            <button id="nextBtn">次の言葉へ</button>
+            <a id="wikiLink" target="_blank" rel="noreferrer" class="ghost-link">背景を読む</a>
+          </div>
+        </div>
+      </article>
+    </section>
+  
+    <section id="tocScreen" class="screen hidden">
+      <div class="detail-actions">
+        <button id="tocBackButton" type="button">扉へ戻る</button>
+        <button id="tocResetButton" type="button">既読をリセット</button>
+      </div>
+      <div class="toc-header">
+        <p class="eyebrow">INDEX</p>
+        <h1>言葉の目次</h1>
+        <p class="lead">一度開いた言葉には印がつきます。クリックするとその言葉へ移動できます。</p>
+        <input id="tocSearch" class="toc-search" type="search" placeholder="人物名・言葉・訳で探す">
+      </div>
+      <div id="tocList" class="toc-list"></div>
+    </section>
+
+</main>
+  <div id="transitionOverlay" aria-hidden="true"><div id="transitionMood"></div></div>
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
+
+<!-- reordered sections update -->
