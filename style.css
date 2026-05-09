@@ -1,0 +1,311 @@
+
+*{box-sizing:border-box}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic","YuGothic",system-ui,sans-serif;background:linear-gradient(to bottom,#fff,#fafafa);color:#111}
+.screen{display:none;min-height:100svh}.screen.active{display:block}
+#door-screen{padding:52px 18px 80px}.door-header{text-align:center;max-width:760px;margin:auto}.tiny{letter-spacing:.36em;color:#c5c5c5;font-size:12px}.door-header h1{font-size:clamp(34px,9vw,60px);letter-spacing:-.05em;margin:.3em 0}.lead{color:#999;line-height:1.8}
+.door-choices{display:grid;grid-template-columns:repeat(var(--cols,1),minmax(0,1fr));gap:36px;max-width:900px;margin:70px auto 34px;justify-items:center}
+.door-card{display:grid;justify-items:center;gap:16px}.door{width:min(46vw,190px);aspect-ratio:.62;border-radius:8px;border:1px solid rgba(0,0,0,.08);background:var(--door-bg);position:relative;box-shadow:0 20px 70px rgba(0,0,0,.08);transition:.7s;cursor:pointer}
+.door:before{content:"";position:absolute;inset:14px;border:1px solid rgba(0,0,0,.08);border-radius:3px}.knob{position:absolute;right:18px;top:50%;width:24px;height:24px;border-radius:50%;background:#fff;border:1px solid #ccc}.door.opening{transform:perspective(900px) rotateY(-10deg);opacity:.65}
+.mood{display:block;font-size:21px;font-weight:700}.door-name{display:block;color:#aaa;margin-top:8px}.door-info{text-align:center}
+.ghost{display:block;margin:34px auto 0;border:0;background:transparent;color:#aaa;font:inherit}.top{margin:24px 0 16px 18px}
+.card{max-width:980px;margin:12px auto 80px;background:rgba(255,255,255,.9);border:1px solid rgba(0,0,0,.05);border-radius:30px;box-shadow:0 24px 90px rgba(0,0,0,.07)}
+.content{padding:clamp(24px,6vw,58px)}.door-label,.type-label,.language-label{color:#aaa}.type-label{letter-spacing:.14em;font-size:12px}.language-label{font-size:13px;margin-top:22px}
+#quoteTitle{font-size:clamp(34px,8vw,62px);line-height:1.05;margin:10px 0 6px;letter-spacing:-.04em}
+blockquote{font-size:clamp(30px,7vw,56px);line-height:1.22;margin:22px 0 18px;padding:0;border:0;font-weight:700;letter-spacing:-.04em}
+.quote-jp{color:#555;font-size:20px;line-height:1.85}
+h2{font-size:15px;margin-top:44px;color:#222}p{font-size:17px;line-height:1.95}
+.timeline-box{margin-top:42px;padding-top:18px;border-top:1px solid #eee}.timeline-item{display:flex;gap:18px;line-height:1.8}.timeline-year{min-width:88px;color:#999}
+.actions{display:flex;gap:22px;align-items:center;flex-wrap:wrap;margin-top:42px}#nextBtn{border:0;border-radius:999px;background:#111;color:#fff;padding:14px 24px;font:inherit}.ghost-link{color:#777;text-decoration:none}
+#transitionOverlay{position:fixed;inset:0;z-index:999;background:#fff;opacity:0;pointer-events:none;display:grid;place-items:center;transition:.55s}#transitionOverlay.active{opacity:1}#transitionMood{font-size:clamp(28px,8vw,58px);letter-spacing:.08em;opacity:.72;text-align:center;padding:0 24px;line-height:1.5}
+.door-border-far{--door-bg:linear-gradient(90deg,#d7dbe0,#f7f8f9 45%,#9ba2aa)}
+.door-nordic-cold{--door-bg:linear-gradient(90deg,#f8fcff,#fff 45%,#c8ddea)}
+.door-nature-kind{--door-bg:linear-gradient(90deg,#dff0dc,#fff 45%,#9ec68e)}
+.door-life-aged{--door-bg:linear-gradient(90deg,#7b5a3b,#a68055 45%,#3c2a1b)}
+.door-dark-sin{--door-bg:linear-gradient(90deg,#2a2522,#4b4038 45%,#130f0d)}
+
+/* context episode version */
+.door-info { display: none !important; }
+.door-label:empty { display: none; }
+
+/* translation refinement */
+.translation-block h2 {
+  margin-top: 26px;
+}
+.known-jp {
+  color: #444;
+  font-size: 20px;
+  line-height: 1.85;
+}
+.translation-note {
+  color: #777;
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.translation-note {
+  white-space: pre-line;
+}
+
+/* related quote buttons */
+.related-chips {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+.related-chips button {
+  text-align: left;
+  border-radius: 18px;
+  padding: 15px 17px;
+  line-height: 1.5;
+}
+.related-speaker {
+  color: #777;
+  font-size: 13px;
+}
+.related-line {
+  color: #111;
+  font-size: 15px;
+}
+.muted {
+  color: #aaa;
+  font-size: 14px;
+}
+
+#workContextWrap p {
+  color: #444;
+}
+
+/* Table of contents and no-repeat progress */
+.top-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 18px 0 8px;
+}
+.sub-action {
+  border: 1px solid rgba(0,0,0,.12);
+  background: rgba(255,255,255,.82);
+  border-radius: 999px;
+  padding: 10px 15px;
+  font-size: 14px;
+  cursor: pointer;
+}
+.sub-action.ghost {
+  opacity: .78;
+}
+.progress-text {
+  text-align: center;
+  color: #777;
+  font-size: 13px;
+  margin: 8px 0 18px;
+}
+.toc-header {
+  max-width: 760px;
+  margin: 0 auto 18px;
+  text-align: center;
+}
+.toc-search {
+  width: min(720px, 92vw);
+  margin-top: 18px;
+  padding: 14px 16px;
+  border-radius: 18px;
+  border: 1px solid rgba(0,0,0,.14);
+  background: rgba(255,255,255,.9);
+  font-size: 16px;
+}
+.toc-list {
+  width: min(860px, 94vw);
+  margin: 18px auto 60px;
+  display: grid;
+  gap: 10px;
+}
+.toc-item {
+  display: grid;
+  grid-template-columns: 54px 1fr 52px;
+  gap: 12px;
+  align-items: center;
+  text-align: left;
+  border: 1px solid rgba(0,0,0,.1);
+  background: rgba(255,255,255,.88);
+  border-radius: 20px;
+  padding: 14px 15px;
+  cursor: pointer;
+}
+.toc-item.seen {
+  opacity: .58;
+}
+.toc-num {
+  color: #999;
+  font-size: 13px;
+  letter-spacing: .08em;
+}
+.toc-main {
+  display: grid;
+  gap: 4px;
+}
+.toc-speaker {
+  color: #777;
+  font-size: 13px;
+}
+.toc-quote {
+  color: #111;
+  font-size: 15px;
+  line-height: 1.55;
+}
+.toc-doorjp {
+  color: #555;
+  font-size: 13px;
+  line-height: 1.5;
+}
+.toc-status {
+  justify-self: end;
+  color: #999;
+  font-size: 12px;
+  border: 1px solid rgba(0,0,0,.1);
+  border-radius: 999px;
+  padding: 4px 8px;
+}
+@media (max-width: 640px) {
+  .toc-item {
+    grid-template-columns: 42px 1fr;
+  }
+  .toc-status {
+    grid-column: 2;
+    justify-self: start;
+  }
+}
+
+.screen.hidden{display:none!important}
+.screen.active{display:block!important}
+
+
+/* Fixed: mobile-friendly trace/background section */
+.timeline-box,
+#traceBox {
+  margin-top: 34px;
+  padding-top: 28px;
+  border-top: 1px solid rgba(0,0,0,.08);
+}
+
+.timeline-box h2,
+#traceBox h2 {
+  margin: 0 0 18px;
+  font-size: 20px;
+  line-height: 1.5;
+}
+
+.trace-list {
+  display: grid;
+  gap: 12px;
+}
+
+.trace-card {
+  display: grid;
+  grid-template-columns: 92px 1fr;
+  gap: 14px;
+  align-items: start;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(0,0,0,.06);
+}
+
+.trace-year {
+  color: #999;
+  font-size: 15px;
+  line-height: 1.7;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+
+.trace-text {
+  color: #222;
+  font-size: 16px;
+  line-height: 1.85;
+  word-break: normal;
+  overflow-wrap: anywhere;
+}
+
+.trace-empty {
+  color: #999;
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.detail-actions {
+  margin-top: 30px;
+}
+
+@media (max-width: 560px) {
+  .trace-card {
+    grid-template-columns: 1fr;
+    gap: 3px;
+    padding: 13px 0;
+  }
+
+  .trace-year {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .trace-text {
+    font-size: 16px;
+    line-height: 1.8;
+  }
+}
+
+/* Mood entry buttons */
+.mood-section {
+  width: min(760px, 94vw);
+  margin: 22px auto 12px;
+  padding: 18px;
+  border-radius: 26px;
+  background: rgba(255,255,255,.62);
+  border: 1px solid rgba(0,0,0,.06);
+}
+.mood-title {
+  margin: 0 0 12px;
+  color: #333;
+  font-weight: 700;
+  font-size: 16px;
+}
+.mood-choices {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+.mood-chip {
+  border: 1px solid rgba(0,0,0,.1);
+  background: rgba(255,255,255,.9);
+  border-radius: 18px;
+  padding: 13px 14px;
+  text-align: left;
+  cursor: pointer;
+  min-height: 70px;
+}
+.mood-chip span {
+  display: block;
+  color: #111;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 1.4;
+}
+.mood-chip small {
+  display: block;
+  margin-top: 5px;
+  color: #888;
+  font-size: 12px;
+  line-height: 1.35;
+}
+@media (max-width: 560px) {
+  .mood-section {
+    margin-top: 18px;
+    padding: 15px;
+    border-radius: 22px;
+  }
+  .mood-choices {
+    grid-template-columns: 1fr;
+  }
+  .mood-chip {
+    min-height: 64px;
+  }
+}
